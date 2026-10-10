@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stazam: songs for your Story</title>
 <meta name="theme-color" content="#0c0a1d">
+<meta name="description" content="Snap a story. Find the song. Stazam suggests songs for your Instagram Story from a photo, right in your browser.">
+<meta property="og:title" content="Stazam: songs for your Story">
+<meta property="og:description" content="Snap a story. Find the song.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zbalbolaa.github.io/Story-songs/">
+<meta property="og:image" content="https://zbalbolaa.github.io/Story-songs/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -61,7 +68,8 @@
   .frame img { width:100%; height:100%; object-fit:cover; display:block; }
   .badge { position:absolute; left:10px; right:10px; bottom:12px; padding:8px 12px; border-radius:999px; text-align:center;
     background:rgba(12,10,29,.7); border:1px solid rgba(255,255,255,.18); color:#fff; font-weight:700; font-size:.9rem; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
-  .again { display:block; margin:16px auto 0; }
+  .row { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  .again { margin:0; }
 
   button, a.lnk { font:700 .82rem/1 "Plus Jakarta Sans",system-ui,sans-serif; min-height:38px; padding:0 15px; border-radius:999px;
     border:1px solid var(--line); background:var(--glass); color:var(--ink); cursor:pointer; text-decoration:none; white-space:nowrap;
@@ -92,9 +100,19 @@
   li { display:grid; grid-template-columns:1fr auto auto auto; align-items:center; gap:8px; padding:13px 14px; border-top:1px solid var(--line); transition:background .15s; }
   li:first-child { border-top:0; }
   li:hover { background:rgba(255,255,255,.04); }
-  .song { min-width:0; }
+  .song { display:flex; align-items:center; gap:8px; min-width:0; }
+  .song > div { min-width:0; flex:1; }
   .song b { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
   .song span { color:var(--muted); font-size:.85rem; }
+  .langs { display:flex; gap:6px; justify-content:flex-end; margin:-12px 0 10px; }
+  .langs .chip { min-height:30px; padding:0 11px; font-size:.75rem; }
+  .cap { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:14px; padding:14px; border:1px solid var(--line); border-radius:20px; background:var(--glass); }
+  .cap span { flex:1 1 100%; font-weight:600; }
+  .heart { flex:none; width:36px; min-height:36px; padding:0; font-size:1.15rem; }
+  .heart.on { color:var(--pink); border-color:var(--pink); }
+  .chip.done { background:linear-gradient(135deg,#22c55e,#16a34a); border-color:transparent; color:#fff; }
+  .upd { position:fixed; left:50%; transform:translateX(-50%); bottom:16px; z-index:10; display:flex; gap:10px; align-items:center; padding:8px 8px 8px 16px;
+    border-radius:999px; background:rgba(12,10,29,.92); border:1px solid var(--line); font-size:.88rem; backdrop-filter:blur(10px); }
   .empty { display:block; padding:16px; color:var(--muted); }
   @media (max-width:480px) {
     li { grid-template-columns:repeat(3,1fr); }
@@ -114,11 +132,14 @@
 </head>
 <body>
 <main>
+  <div class="langs" id="langs" role="group" aria-label="Language">
+    <button class="chip" data-l="en" type="button">EN</button><button class="chip" data-l="fr" type="button">FR</button><button class="chip" data-l="ar" type="button">AR</button>
+  </div>
   <h1>Stazam</h1>
-  <p class="tag">Snap a story. Find the song.</p>
-  <p class="sub">Drop a photo and get songs that match it for your Instagram Story. Your photo never leaves your device.</p>
+  <p class="tag" data-i="tag"></p>
+  <p class="sub" data-i="sub"></p>
 
-  <button class="chip" id="install" type="button" hidden style="margin:0 0 16px">Install Stazam as an app</button>
+  <button class="chip" id="install" type="button" hidden style="margin:0 0 16px" data-i="install"></button>
 
   <div class="load" id="load">
     <p id="status" role="status">Starting the model…</p>
@@ -128,31 +149,41 @@
   <label class="pick off" id="pick">
     <input id="file" type="file" accept="image/*" disabled>
     <span class="orb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
-    <strong>Tap to pick a photo</strong>
-    <small>or drop one here</small>
+    <strong data-i="pick"></strong>
+    <small data-i="drop"></small>
   </label>
 
   <section id="out" hidden>
     <div class="frame"><img id="preview" alt="Your photo"><div class="badge" id="badge"></div></div>
-    <button class="again" id="again" type="button">Try another photo</button>
+    <div class="row"><button class="again" id="again" type="button" data-i="again"></button><button class="again" id="card" type="button" data-i="card"></button></div>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div class="filters" id="filters">
-      <button class="chip" data-f="all" aria-pressed="true" type="button">All</button>
-      <button class="chip" data-f="local" aria-pressed="false" type="button">Arabic &amp; Moroccan</button>
-      <button class="chip" data-f="intl" aria-pressed="false" type="button">International</button>
+      <button class="chip" data-f="all" aria-pressed="true" type="button" data-i="fAll"></button>
+      <button class="chip" data-f="local" aria-pressed="false" type="button" data-i="fLocal"></button>
+      <button class="chip" data-f="intl" aria-pressed="false" type="button" data-i="fIntl"></button>
     </div>
     <ul id="list"></ul>
-    <details class="more"><summary>Not the right vibe? Pick a mood yourself</summary><div class="filters" id="mchips"></div></details>
+    <div class="row"><button class="chip" id="shuffle" type="button" data-i="shuffle"></button></div>
+    <div class="cap"><span id="captext"></span><button class="chip" id="capcopy" type="button" data-i="capcopy"></button><button class="chip" id="capnext" type="button" data-i="another"></button></div>
+    <details class="more"><summary data-i="notright"></summary><div class="filters" id="mchips"></div></details>
+  </section>
+
+  <section class="genres" id="favsec" hidden>
+    <h2 data-i="favs"></h2>
+    <ul id="flist"></ul>
   </section>
 
   <section class="genres" id="genres" hidden>
-    <h2>Or browse by genre</h2>
-    <p>No photo needed. Pick a genre to see songs.</p>
+    <h2 data-i="browse"></h2>
+    <p data-i="browsep"></p>
     <div class="filters" id="gchips"></div>
     <ul id="glist" hidden></ul>
   </section>
 
-  <p class="hint">Copy the song name, then in Instagram tap the sticker icon, choose Music, and paste it into the search.</p>
+  <p class="hint" data-i="hint"></p>
+  <div class="row"><button class="chip" id="share" type="button" data-i="share"></button></div>
+  <p class="hint"><span data-i="privacy"></span> <a href="https://github.com/Zbalbolaa/Story-songs" target="_blank" rel="noopener" style="color:inherit">GitHub</a></p>
+  <div class="upd" id="upd" hidden><span data-i="newv"></span><button class="copy" id="reload" type="button" data-i="reload"></button></div>
 </main>
 
 <script type="module">
@@ -203,7 +234,11 @@ const status = $('status'), bar = $('bar'), pick = $('pick'), fileInput = $('fil
 
 // ask the browser not to evict the cached model
 navigator.storage?.persist?.().catch(() => {});
-navigator.serviceWorker?.register('sw.js').catch(() => {});
+if (navigator.serviceWorker) {
+  const had = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (had) $('upd').hidden = false; });
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 let installEvt;
 addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('install').hidden = false; });
 $('install').addEventListener('click', async () => { installEvt.prompt(); await installEvt.userChoice; $('install').hidden = true; });
@@ -216,7 +251,7 @@ function onProgress(p) {
     let L = 0, T = 0; for (const f of Object.values(prog)) { L += f.l; T += f.t; }
     const pc = Math.round(L / T * 100);
     bar.style.width = pc + '%';
-    status.textContent = `Downloading the model… ${pc}% (first visit only)`;
+    status.textContent = `${t('dl')} ${pc}%`;
   }
 }
 
@@ -231,16 +266,71 @@ async function shrink(file, max = 448) {
   return new Promise(r => c.toBlob(b => r(URL.createObjectURL(b)), 'image/jpeg', 0.9));
 }
 
-let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all', manual = null;
+const MODEL = 'Xenova/clip-vit-base-patch32'; // more accurate but bigger: 'Xenova/clip-vit-base-patch16'
+
+const T = {
+  en: { tag:'Snap a story. Find the song.', sub:'Drop a photo and get songs that match it for your Instagram Story. Your photo never leaves your device.', install:'Install Stazam as an app',
+    pick:'Tap to pick a photo', drop:'or drop one here', again:'Try another photo', card:'Share story card', fAll:'All', fLocal:'Arabic & Moroccan', fIntl:'International',
+    shuffle:'Shuffle songs', another:'Another caption', capcopy:'Copy caption', copy:'Copy name', copied:'Copied ✓', notright:'Not the right vibe? Pick a mood yourself',
+    browse:'Or browse by genre', browsep:'No photo needed. Pick a genre to see songs.', favs:'My favorites',
+    hint:'Copy the song name, then in Instagram tap the sticker icon, choose Music, and paste it into the search.', share:'Share Stazam',
+    privacy:'Your photos never leave your device. Everything runs in your browser.', newv:'A new version is ready.', reload:'Refresh',
+    dl:'Downloading the model…', ready:'Ready. Pick a photo.', reading:'Reading the vibe…' },
+  fr: { tag:'Une photo. La chanson parfaite.', sub:'Dépose une photo et reçois des chansons pour ta story Instagram. Ta photo ne quitte jamais ton appareil.', install:'Installer Stazam comme application',
+    pick:'Touche pour choisir une photo', drop:'ou dépose-la ici', again:'Essayer une autre photo', card:'Partager la carte story', fAll:'Tout', fLocal:'Arabe et marocain', fIntl:'International',
+    shuffle:'Mélanger', another:'Autre légende', capcopy:'Copier la légende', copy:'Copier le nom', copied:'Copié ✓', notright:'Pas la bonne ambiance ? Choisis toi-même',
+    browse:'Ou explore par genre', browsep:'Pas besoin de photo. Choisis un genre.', favs:'Mes favoris',
+    hint:"Copie le nom de la chanson, puis dans Instagram touche l'autocollant, choisis Musique et colle-le dans la recherche.", share:'Partager Stazam',
+    privacy:'Tes photos ne quittent jamais ton appareil. Tout tourne dans ton navigateur.', newv:'Une nouvelle version est prête.', reload:'Actualiser',
+    dl:'Téléchargement du modèle…', ready:'Prêt. Choisis une photo.', reading:"Analyse de l'ambiance…" },
+  ar: { tag:'صورة واحدة. الأغنية المناسبة.', sub:'ضع صورة واحصل على أغانٍ تناسبها لقصتك على إنستغرام. صورتك لا تغادر جهازك أبداً.', install:'ثبّت Stazam كتطبيق',
+    pick:'اضغط لاختيار صورة', drop:'أو اسحب صورة إلى هنا', again:'جرّب صورة أخرى', card:'شارك بطاقة القصة', fAll:'الكل', fLocal:'عربي ومغربي', fIntl:'عالمي',
+    shuffle:'اخلط الأغاني', another:'تعليق آخر', capcopy:'انسخ التعليق', copy:'انسخ الاسم', copied:'تم النسخ ✓', notright:'ليست الأجواء المناسبة؟ اختر بنفسك',
+    browse:'أو تصفح حسب النوع', browsep:'لا تحتاج صورة. اختر نوعاً موسيقياً.', favs:'المفضلة',
+    hint:'انسخ اسم الأغنية، ثم في إنستغرام اضغط على الملصق واختر الموسيقى والصقه في البحث.', share:'شارك Stazam',
+    privacy:'صورك لا تغادر جهازك. كل شيء يعمل داخل متصفحك.', newv:'يتوفر إصدار جديد.', reload:'تحديث',
+    dl:'جارٍ تحميل النموذج…', ready:'جاهز. اختر صورة.', reading:'جارٍ تحليل الأجواء…' }
+};
+const MN = {
+  fr: { sunset:'Coucher de soleil', party:'Fête', gym:'Sport', beach:'Plage', rainy:'Pluie', food:'Cuisine', friends:'Amis', city_night:'Ville la nuit', love:'Amour', nature:'Nature', roadtrip:'Road trip', coffee:'Café', stars:'Étoiles', winter:'Hiver', spring:'Fleurs', pets:'Animaux', selfie:'Selfie', travel:'Voyage', football:'Football', study:'Études', desert:'Désert', wedding:'Mariage', birthday:'Anniversaire', sad:'Triste', home:'Maison & jardin' },
+  ar: { sunset:'غروب', party:'حفلة', gym:'رياضة', beach:'شاطئ', rainy:'مطر', food:'أكل', friends:'أصدقاء', city_night:'المدينة ليلاً', love:'حب', nature:'طبيعة', roadtrip:'رحلة طريق', coffee:'قهوة', stars:'نجوم', winter:'شتاء', spring:'زهور', pets:'حيوانات أليفة', selfie:'سيلفي', travel:'سفر', football:'كرة القدم', study:'دراسة', desert:'صحراء', wedding:'عرس', birthday:'عيد ميلاد', sad:'حزين', home:'بيت وحديقة' }
+};
+const CAPS = {
+  sunset:['Chasing the last light.','Golden hour never misses.'], party:['Good vibes only.','Tonight we dance.'], gym:['Stronger than yesterday.','Sweat now, shine later.'],
+  beach:['Salt in the air, sand in my hair.','Sea you soon.'], rainy:['Rainy days and cozy ways.','Let it pour.'], food:['Good food, good mood.','Life is short, eat the cake.'],
+  friends:['Better together.','My people.'], city_night:['City lights, endless nights.','Night owl mode.'], love:['You are my favorite place.','Love, simply.'],
+  nature:['Take me back to the mountains.','Breathe in, breathe out.'], roadtrip:['Windows down, volume up.','Wherever the road goes.'], coffee:['But first, coffee.','Slow mornings.'],
+  stars:['Under a sky full of stars.','Dreaming under the moon.'], winter:['Cold air, warm heart.','Winter mood.'], spring:['Bloom where you are planted.','Hello, spring.'],
+  pets:['Paws and relax.','My favorite human is a pet.'], selfie:['Just me being me.','Main character energy.'], travel:['Wanderlust mode on.','Collecting moments, not things.'],
+  football:['Game day.','Eat, sleep, football, repeat.'], study:['Focus mode.','Little steps every day.'], desert:['Lost in the dunes.','Sand, silence and sky.'],
+  wedding:['Happily ever after starts here.','Love in full bloom.'], birthday:['Another year of magic.','Cake first, questions later.'], sad:['Quiet days.','Healing slowly.'],
+  home:['Home is where the garden grows.','Simple and peaceful.']
+};
+let lang = 'en';
+try { lang = localStorage.getItem('stazam-lang') || (navigator.language || 'en').slice(0, 2); } catch {}
+const t = k => (T[lang] && T[lang][k]) || T.en[k];
+const mn = k => (MN[lang] && MN[lang][k]) || META[k][0];
+
+// favorites and "learning" live only in this browser
+const store = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } };
+const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+const favs = () => store('stazam-fav', []);
+const fid = s => `${s.title}|${s.artist}`;
+const bump = k => { const m = store('stazam-learn', {}); m[k] = (m[k] || 0) + 1; save('stazam-learn', m); };
+
 const GN = { pop:'Pop', rock:'Rock', hiphop:'Hip-Hop', rnb:'R&B', country:'Country', edm:'EDM', jazz:'Jazz', latin:'Latin', reggae:'Reggae', trap:'Trap', metal:'Metal', classical:'Classical', blues:'Blues', afrobeats:'Afrobeats' };
+let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all', manual = null, seed = 0, cap = 0, shown = [], lastFile = null;
+const curKey = () => manual || top[sel].key;
+
+applyLang();
 try {
   [songs, genres, classifier] = await Promise.all([
     fetch('songs.json').then(r => r.json()),
     fetch('genres.json').then(r => r.json()),
-    pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32', { progress_callback: onProgress })
+    pipeline('zero-shot-image-classification', MODEL, { progress_callback: onProgress })
   ]);
   bar.style.width = '100%';
-  status.textContent = 'Ready. Pick a photo.';
+  status.textContent = t('ready');
   pick.classList.remove('off'); fileInput.disabled = false;
   initGenres();
   setTimeout(() => $('load').hidden = true, 1200);
@@ -254,15 +344,17 @@ try {
 
 async function handle(file) {
   if (!file || !file.type.startsWith('image/')) return;
-  status.textContent = 'Reading the vibe…'; $('load').hidden = false; bar.style.width = '100%';
+  status.textContent = t('reading'); $('load').hidden = false; bar.style.width = '100%';
   try {
+    lastFile = file;
     const url = await shrink(file);
     $('preview').src = url;
     const out = await classify(url);
-    const sums = {};
+    const sums = {}, L = store('stazam-learn', {});
     for (const o of out) sums[KEY[o.label]] = (sums[KEY[o.label]] || 0) + o.score;
-    top = Object.entries(sums).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([key, score]) => ({ key, score }));
-    sel = 0; filt = 'all'; manual = null;
+    for (const k in sums) sums[k] += Math.min(.1, .02 * (L[k] || 0));   // moods you picked before get a small boost
+    top = Object.entries(sums).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([key, score]) => ({ key, score: Math.min(score, 1) }));
+    sel = 0; filt = 'all'; manual = null; seed = 0; cap = 0;
     $('out').hidden = false; pick.hidden = true;
     render();
     $('load').hidden = true;
@@ -271,47 +363,87 @@ async function handle(file) {
   }
 }
 fileInput.addEventListener('change', () => handle(fileInput.files[0]));
-$('again').addEventListener('click', () => { $('out').hidden = true; pick.hidden = false; fileInput.value = ''; status.textContent = 'Ready. Pick a photo.'; });
+$('again').addEventListener('click', () => { $('out').hidden = true; pick.hidden = false; fileInput.value = ''; status.textContent = t('ready'); });
 ['dragenter','dragover'].forEach(ev => pick.addEventListener(ev, e => { e.preventDefault(); pick.classList.add('drag'); }));
 ['dragleave','drop'].forEach(ev => pick.addEventListener(ev, e => { e.preventDefault(); pick.classList.remove('drag'); }));
 pick.addEventListener('drop', e => { if (!fileInput.disabled) handle(e.dataTransfer.files[0]); });
 $('filters').addEventListener('click', e => { const f = e.target.dataset.f; if (f) { filt = f; render(); } });
+$('langs').addEventListener('click', e => { const l = e.target.dataset.l; if (l) { lang = l; try { localStorage.setItem('stazam-lang', l); } catch {} applyLang(); } });
+$('shuffle').onclick = () => { seed = Math.floor(Math.random() * 1e9) + 1; render(); };
+$('capnext').onclick = () => { cap++; showCap(); };
+$('capcopy').onclick = () => copyText($('captext').textContent, $('capcopy'), 'capcopy');
+$('card').onclick = shareCard;
+$('reload').onclick = () => location.reload();
+$('share').onclick = async () => {
+  const d = { title: 'Stazam', text: t('tag'), url: location.href.split('#')[0] };
+  try { if (navigator.share) await navigator.share(d); else await copyText(d.url, $('share'), 'share'); } catch {}
+};
+
+function applyLang() {
+  if (!T[lang]) lang = 'en';
+  document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-i]').forEach(el => el.textContent = t(el.dataset.i));
+  document.querySelectorAll('.langs .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.l === lang));
+  document.querySelectorAll('#mchips .chip').forEach(c => c.textContent = `${META[c.dataset.k][1]} ${mn(c.dataset.k)}`);
+  if (top.length && !$('out').hidden) render();
+  renderFavs();
+}
+
+function rng(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let x = Math.imul(a ^ a >>> 15, 1 | a); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; }; }
+function shuffled(a, s) { const r = rng(s), b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+function showCap() { const a = CAPS[curKey()] || []; $('captext').textContent = a.length ? a[cap % a.length] : ''; }
 
 function render() {
-  const key = manual || top[sel].key, score = manual ? null : top[sel].score;
-  $('badge').textContent = `${META[key][1]} ${META[key][0]}` + (score == null ? '' : ` · ${Math.round(score * 100)}%`);
+  const key = curKey(), score = manual ? null : top[sel].score;
+  $('badge').textContent = `${META[key][1]} ${mn(key)}` + (score == null ? '' : ` · ${Math.round(score * 100)}%`);
   $('tabs').innerHTML = '';
-  top.forEach((t, i) => {
+  top.forEach((x, i) => {
     const b = document.createElement('button');
     b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', i === sel && !manual);
-    b.innerHTML = `<b>${META[t.key][1]}</b>${META[t.key][0]} ${Math.round(t.score * 100)}%`;
-    b.onclick = () => { manual = null; sel = i; render(); };
+    b.innerHTML = `<b>${META[x.key][1]}</b>${mn(x.key)} ${Math.round(x.score * 100)}%`;
+    b.onclick = () => { manual = null; sel = i; seed = 0; cap = 0; render(); };
     $('tabs').append(b);
   });
   document.querySelectorAll('#filters .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === filt));
   document.querySelectorAll('#mchips .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.k === manual));
   const list = $('list'); list.innerHTML = '';
-  const items = (songs[key] || []).filter(s => filt === 'all' || (filt === 'local' ? s.t : !s.t));
-  if (!items.length) { list.innerHTML = '<li class="empty">No songs in this filter for this mood.</li>'; return; }
-  for (const s of items) list.append(songRow(s));
+  const all = (songs[key] || []).filter(s => filt === 'all' || (filt === 'local' ? s.t : !s.t));
+  shown = (seed ? shuffled(all, seed) : all).slice(0, 6);
+  if (!shown.length) list.innerHTML = '<li class="empty">—</li>';
+  for (const s of shown) list.append(songRow(s));
+  showCap();
 }
+
+async function copyText(text, btn, label) {
+  try { await navigator.clipboard.writeText(text); }
+  catch { const a = document.createElement('textarea'); a.value = text; document.body.append(a); a.select(); document.execCommand('copy'); a.remove(); }
+  btn.textContent = t('copied'); btn.classList.add('done');
+  setTimeout(() => { btn.textContent = t(label); btn.classList.remove('done'); }, 1500);
+}
+
 function songRow(s) {
-    const q = encodeURIComponent(`${s.title} ${s.artist}`);
-    const li = document.createElement('li');
-    li.innerHTML = `<div class="song"><b></b><span></span></div>
-      <button class="copy" type="button">Copy name</button>
-      <a class="lnk yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${q}">YouTube</a>
-      <a class="lnk spo" target="_blank" rel="noopener" href="https://open.spotify.com/search/${q}">Spotify</a>`;
-    li.querySelector('b').textContent = s.title;
-    li.querySelector('span').textContent = s.artist;
-    const btn = li.querySelector('button');
-    btn.onclick = async () => {
-      const text = `${s.title} ${s.artist}`;
-      try { await navigator.clipboard.writeText(text); }
-      catch { const t = document.createElement('textarea'); t.value = text; document.body.append(t); t.select(); document.execCommand('copy'); t.remove(); }
-      btn.textContent = 'Copied ✓'; btn.classList.add('done'); setTimeout(() => { btn.textContent = 'Copy name'; btn.classList.remove('done'); }, 1500);
-    };
-    return li;
+  const q = encodeURIComponent(`${s.title} ${s.artist}`);
+  const li = document.createElement('li');
+  li.innerHTML = `<div class="song"><div><b></b><span></span></div><button class="heart" type="button" aria-label="Favorite">♡</button></div>
+    <button class="copy" type="button"></button>
+    <a class="lnk yt" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${q}">YouTube</a>
+    <a class="lnk spo" target="_blank" rel="noopener" href="https://open.spotify.com/search/${q}">Spotify</a>`;
+  li.querySelector('b').textContent = s.title;
+  li.querySelector('span').textContent = s.artist;
+  const cp = li.querySelector('.copy'); cp.textContent = t('copy');
+  cp.onclick = () => copyText(`${s.title} ${s.artist}`, cp, 'copy');
+  const hb = li.querySelector('.heart');
+  const isFav = () => favs().some(f => fid(f) === fid(s));
+  const paint = () => { hb.classList.toggle('on', isFav()); hb.textContent = isFav() ? '♥' : '♡'; };
+  paint();
+  hb.onclick = () => { save('stazam-fav', isFav() ? favs().filter(f => fid(f) !== fid(s)) : [...favs(), s]); paint(); renderFavs(); };
+  return li;
+}
+
+function renderFavs() {
+  const a = favs(), ul = $('flist');
+  ul.innerHTML = ''; $('favsec').hidden = !a.length;
+  for (const s of a) ul.append(songRow(s));
 }
 
 function initGenres() {
@@ -329,11 +461,38 @@ function initGenres() {
   }
   for (const k of Object.keys(META)) {
     const c = document.createElement('button');
-    c.className = 'chip'; c.type = 'button'; c.dataset.k = k; c.textContent = `${META[k][1]} ${META[k][0]}`; c.setAttribute('aria-pressed', 'false');
-    c.onclick = () => { manual = k; render(); };
+    c.className = 'chip'; c.type = 'button'; c.dataset.k = k; c.textContent = `${META[k][1]} ${mn(k)}`; c.setAttribute('aria-pressed', 'false');
+    c.onclick = () => { manual = k; seed = 0; cap = 0; bump(k); render(); };
     $('mchips').append(c);
   }
   $('genres').hidden = false;
+}
+
+// shareable 1080x1920 image for Stories
+function rr(x, a, b, w, h, r) { x.beginPath(); x.moveTo(a + r, b); x.arcTo(a + w, b, a + w, b + h, r); x.arcTo(a + w, b + h, a, b + h, r); x.arcTo(a, b + h, a, b, r); x.arcTo(a, b, a + w, b, r); x.closePath(); }
+function fit(x, text, max) { let s = text; while (x.measureText(s).width > max && s.length > 4) s = s.slice(0, -1); return s === text ? s : s + '…'; }
+async function shareCard() {
+  if (!lastFile) return;
+  const key = curKey(), song = shown[0], W = 1080, H = 1920;
+  const c = document.createElement('canvas'); c.width = W; c.height = H; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#7c5cff'); g.addColorStop(.62, '#ff3d9a'); g.addColorStop(1, '#ff8a4c');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  const bmp = await createImageBitmap(lastFile), fw = 860, fh = 1180, fx = (W - fw) / 2, fy = 250;
+  x.save(); rr(x, fx, fy, fw, fh, 56); x.clip();
+  const s = Math.max(fw / bmp.width, fh / bmp.height), dw = bmp.width * s, dh = bmp.height * s;
+  x.drawImage(bmp, fx + (fw - dw) / 2, fy + (fh - dh) / 2, dw, dh); x.restore();
+  x.textAlign = 'center'; x.fillStyle = '#fff';
+  x.font = '800 120px "Bricolage Grotesque", system-ui, sans-serif'; x.fillText('Stazam', W / 2, 170);
+  x.font = '700 64px system-ui, sans-serif'; x.fillText(`${META[key][1]} ${mn(key)}`, W / 2, fy + fh + 110);
+  if (song) {
+    x.font = '800 78px "Bricolage Grotesque", system-ui, sans-serif'; x.fillText(fit(x, song.title, 940), W / 2, fy + fh + 235);
+    x.font = '600 52px system-ui, sans-serif'; x.fillText(fit(x, song.artist, 940), W / 2, fy + fh + 310);
+  }
+  x.globalAlpha = .85; x.font = '600 40px system-ui, sans-serif'; x.fillText('zbalbolaa.github.io/Story-songs', W / 2, H - 70);
+  const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+  const file = new File([blob], 'stazam-story.png', { type: 'image/png' });
+  if (navigator.canShare?.({ files: [file] })) { try { await navigator.share({ files: [file] }); return; } catch {} }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'stazam-story.png'; a.click();
 }
 </script>
 </body>
