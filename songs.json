@@ -254,5 +254,16 @@
     {"title": "Skinny Love", "artist": "Bon Iver"},
     {"title": "Ana Fi Intizarak", "artist": "Umm Kulthum", "t": "ar"},
     {"title": "Hadal Ahbek", "artist": "Issam Alnajjar", "t": "ar"}
+  ],
+  "home": [
+    {"title": "Our House", "artist": "Madness"},
+    {"title": "Home", "artist": "Michael Buble"},
+    {"title": "Homeward Bound", "artist": "Simon & Garfunkel"},
+    {"title": "Beautiful Day", "artist": "U2"},
+    {"title": "Pocketful of Sunshine", "artist": "Natasha Bedingfield"},
+    {"title": "Landslide", "artist": "Fleetwood Mac"},
+    {"title": "Welcome Home", "artist": "Radical Face"},
+    {"title": "Nassam Alayna El Hawa", "artist": "Fairuz", "t": "ar"},
+    {"title": "Tamally Maak", "artist": "Amr Diab", "t": "ar"}
   ]
 }
