@@ -1,0 +1,312 @@
+{
+  "sunset": [
+    {
+      "title": "Sunset Lover",
+      "artist": "Petit Biscuit"
+    },
+    {
+      "title": "Golden Hour",
+      "artist": "JVKE"
+    },
+    {
+      "title": "Heat Waves",
+      "artist": "Glass Animals"
+    },
+    {
+      "title": "Riptide",
+      "artist": "Vance Joy"
+    },
+    {
+      "title": "Coastline",
+      "artist": "Hollow Coves"
+    },
+    {
+      "title": "Sunday Best",
+      "artist": "Surfaces"
+    },
+    {
+      "title": "Nassam Alayna El Hawa",
+      "artist": "Fairuz",
+      "t": "ar"
+    },
+    {
+      "title": "Tamally Maak",
+      "artist": "Amr Diab",
+      "t": "ar"
+    },
+    {
+      "title": "Salma Ya Salama",
+      "artist": "Dalida",
+      "t": "ar"
+    },
+    {
+      "title": "Mal Hbibi Malou",
+      "artist": "Saad Lamjarred",
+      "t": "ma"
+    }
+  ],
+  "party": [
+    {
+      "title": "Lm3allem",
+      "artist": "Saad Lamjarred",
+      "t": "ma"
+    },
+    {
+      "title": "Ghaltana",
+      "artist": "Saad Lamjarred",
+      "t": "ma"
+    },
+    {
+      "title": "Dalida",
+      "artist": "Soolking",
+      "t": "ar"
+    },
+    {
+      "title": "Ya Tabtab Wa Dalaa",
+      "artist": "Nancy Ajram",
+      "t": "ar"
+    },
+    {
+      "title": "Suavemente",
+      "artist": "Soolking",
+      "t": "ar"
+    },
+    {
+      "title": "Taki Taki",
+      "artist": "DJ Snake"
+    },
+    {
+      "title": "Mi Gente",
+      "artist": "J Balvin"
+    },
+    {
+      "title": "Blinding Lights",
+      "artist": "The Weeknd"
+    },
+    {
+      "title": "Calm Down",
+      "artist": "Rema"
+    },
+    {
+      "title": "Titi Me Pregunto",
+      "artist": "Bad Bunny"
+    }
+  ],
+  "gym": [
+    {
+      "title": "Stronger",
+      "artist": "Kanye West"
+    },
+    {
+      "title": "Lose Yourself",
+      "artist": "Eminem"
+    },
+    {
+      "title": "Till I Collapse",
+      "artist": "Eminem"
+    },
+    {
+      "title": "Can't Hold Us",
+      "artist": "Macklemore"
+    },
+    {
+      "title": "SICKO MODE",
+      "artist": "Travis Scott"
+    },
+    {
+      "title": "Believer",
+      "artist": "Imagine Dragons"
+    },
+    {
+      "title": "Number One",
+      "artist": "Mohamed Ramadan",
+      "t": "ar"
+    }
+  ],
+  "beach": [
+    {
+      "title": "Waka Waka",
+      "artist": "Shakira"
+    },
+    {
+      "title": "Despacito",
+      "artist": "Luis Fonsi"
+    },
+    {
+      "title": "Summer",
+      "artist": "Calvin Harris"
+    },
+    {
+      "title": "Sunflower",
+      "artist": "Post Malone"
+    },
+    {
+      "title": "Island in the Sun",
+      "artist": "Weezer"
+    },
+    {
+      "title": "Aicha",
+      "artist": "Cheb Khaled",
+      "t": "ar"
+    },
+    {
+      "title": "Didi",
+      "artist": "Cheb Khaled",
+      "t": "ar"
+    },
+    {
+      "title": "Akhasmak Ah",
+      "artist": "Nancy Ajram",
+      "t": "ar"
+    }
+  ],
+  "rainy": [
+    {
+      "title": "Set Fire to the Rain",
+      "artist": "Adele"
+    },
+    {
+      "title": "Someone Like You",
+      "artist": "Adele"
+    },
+    {
+      "title": "Fix You",
+      "artist": "Coldplay"
+    },
+    {
+      "title": "Another Love",
+      "artist": "Tom Odell"
+    },
+    {
+      "title": "Let Her Go",
+      "artist": "Passenger"
+    },
+    {
+      "title": "Derniere Danse",
+      "artist": "Indila"
+    },
+    {
+      "title": "Li Beirut",
+      "artist": "Fairuz",
+      "t": "ar"
+    },
+    {
+      "title": "Enta Omri",
+      "artist": "Umm Kulthum",
+      "t": "ar"
+    }
+  ],
+  "food": [
+    {
+      "title": "Banana Pancakes",
+      "artist": "Jack Johnson"
+    },
+    {
+      "title": "Sugar",
+      "artist": "Maroon 5"
+    },
+    {
+      "title": "Happy",
+      "artist": "Pharrell Williams"
+    },
+    {
+      "title": "Better Together",
+      "artist": "Jack Johnson"
+    },
+    {
+      "title": "Les Champs-Elysees",
+      "artist": "Joe Dassin"
+    },
+    {
+      "title": "Good as Hell",
+      "artist": "Lizzo"
+    },
+    {
+      "title": "J'en ai marre",
+      "artist": "Najat Aatabou",
+      "t": "ma"
+    },
+    {
+      "title": "C'est la vie",
+      "artist": "Cheb Khaled",
+      "t": "ar"
+    },
+    {
+      "title": "Nour El Ain",
+      "artist": "Amr Diab",
+      "t": "ar"
+    }
+  ],
+  "friends": [
+    {
+      "title": "Count on Me",
+      "artist": "Bruno Mars"
+    },
+    {
+      "title": "I Gotta Feeling",
+      "artist": "Black Eyed Peas"
+    },
+    {
+      "title": "Best Day of My Life",
+      "artist": "American Authors"
+    },
+    {
+      "title": "See You Again",
+      "artist": "Wiz Khalifa"
+    },
+    {
+      "title": "Good Time",
+      "artist": "Owl City"
+    },
+    {
+      "title": "Lean on Me",
+      "artist": "Bill Withers"
+    },
+    {
+      "title": "Hadal Ahbek",
+      "artist": "Issam Alnajjar",
+      "t": "ar"
+    },
+    {
+      "title": "Aayshalak",
+      "artist": "Elissa",
+      "t": "ar"
+    }
+  ],
+  "city_night": [
+    {
+      "title": "Midnight City",
+      "artist": "M83"
+    },
+    {
+      "title": "Nights",
+      "artist": "Frank Ocean"
+    },
+    {
+      "title": "Starboy",
+      "artist": "The Weeknd"
+    },
+    {
+      "title": "Redbone",
+      "artist": "Childish Gambino"
+    },
+    {
+      "title": "After Dark",
+      "artist": "Mr.Kitty"
+    },
+    {
+      "title": "Streets",
+      "artist": "Doja Cat"
+    },
+    {
+      "title": "Casablanca",
+      "artist": "Saad Lamjarred",
+      "t": "ma"
+    },
+    {
+      "title": "Enty",
+      "artist": "Saad Lamjarred",
+      "t": "ma"
+    }
+  ]
+}
