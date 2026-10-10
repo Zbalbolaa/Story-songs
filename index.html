@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stazam: songs for your Story</title>
 <meta name="theme-color" content="#0c0a1d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stazam">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
@@ -95,6 +101,9 @@
     li .song { grid-column:1/-1; }
     li button, li a.lnk { width:100%; }
   }
+  .more { margin-top:16px; }
+  .more summary { cursor:pointer; color:var(--muted); font-weight:600; font-size:.9rem; padding:8px 0; }
+  .more .filters { margin-top:8px; }
   .genres { margin-top:34px; }
   .genres h2 { font:800 1.35rem "Bricolage Grotesque",system-ui,sans-serif; margin:0 0 4px; }
   .genres p { color:var(--muted); font-size:.88rem; margin:0 0 12px; }
@@ -108,6 +117,8 @@
   <h1>Stazam</h1>
   <p class="tag">Snap a story. Find the song.</p>
   <p class="sub">Drop a photo and get songs that match it for your Instagram Story. Your photo never leaves your device.</p>
+
+  <button class="chip" id="install" type="button" hidden style="margin:0 0 16px">Install Stazam as an app</button>
 
   <div class="load" id="load">
     <p id="status" role="status">Starting the model…</p>
@@ -131,6 +142,7 @@
       <button class="chip" data-f="intl" aria-pressed="false" type="button">International</button>
     </div>
     <ul id="list"></ul>
+    <details class="more"><summary>Not the right vibe? Pick a mood yourself</summary><div class="filters" id="mchips"></div></details>
   </section>
 
   <section class="genres" id="genres" hidden>
@@ -148,16 +160,30 @@ import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers
 env.allowLocalModels = false;
 
 const MOODS = {
-  sunset:'a sunset with an orange sky', party:'a party with people dancing and colorful lights',
-  gym:'a gym workout with weights', beach:'a beach with sea and sand',
-  rainy:'a rainy day with raindrops on a window', food:'a plate of delicious food',
-  friends:'a group of friends smiling together', city_night:'a city street at night with lights',
-  love:'a romantic couple together', nature:'a green forest or mountain landscape', roadtrip:'a car driving on a road trip',
-  coffee:'a cup of coffee in a cozy cafe', stars:'a night sky full of stars', winter:'a snowy winter landscape',
-  spring:'colorful flowers blooming in a garden', pets:'a cute cat or dog', selfie:'a selfie of a person posing',
-  travel:'a traveler exploring an old city', football:'a football match in a stadium', study:'a desk with books for studying',
-  desert:'a desert with sand dunes', wedding:'a wedding celebration', birthday:'a birthday cake with candles',
-  sad:'a lonely person looking out of a window'
+  sunset:['a sunset with an orange sky','golden hour sunlight at dusk'],
+  party:['a party with people dancing and colorful lights','a crowded nightclub with disco lights'],
+  gym:['a person lifting weights in a gym','gym equipment and a fitness workout'],
+  beach:['a tropical beach with sea and sand','people swimming at the seaside'],
+  rainy:['a rainy day with raindrops on a window','a wet street in the rain with umbrellas'],
+  food:['a plate of delicious food','a table with a meal and drinks'],
+  friends:['a group of friends smiling together','people hugging and laughing'],
+  city_night:['a city street at night with lights','skyscrapers and traffic lights at night'],
+  love:['a romantic couple together','a bouquet of roses and hearts'],
+  nature:['a green forest landscape','a mountain landscape with valleys and clouds','a peaceful lake or river in nature','countryside fields and hills'],
+  roadtrip:['a car driving on a road trip','a long highway through the countryside'],
+  coffee:['a cup of coffee in a cozy cafe','a latte on a wooden table'],
+  stars:['a night sky full of stars','the moon and milky way at night'],
+  winter:['a snowy winter landscape','snow covered trees and ice'],
+  spring:['colorful flowers blooming in a garden','pink blossoms in spring'],
+  pets:['a cute cat or dog','a pet animal portrait'],
+  selfie:['a selfie of a person posing','a close-up portrait of a person'],
+  travel:['a traveler exploring an old city','a famous landmark on a trip'],
+  football:['a football match in a stadium','soccer players on a pitch'],
+  study:['a desk with books for studying','a laptop and notebook on a desk'],
+  desert:['a desert with sand dunes','a camel in the Sahara desert'],
+  wedding:['a wedding celebration','a bride and groom in wedding clothes'],
+  birthday:['a birthday cake with candles','balloons and party decorations'],
+  sad:['a lonely person looking out of a window','a moody gloomy grey scene']
 };
 const META = {
   sunset:['Sunset','🌇'], party:['Party','🎉'], gym:['Gym','💪'], beach:['Beach','🏖️'],
@@ -167,13 +193,19 @@ const META = {
   football:['Football','⚽'], study:['Study','📚'], desert:['Desert','🏜️'], wedding:['Wedding','💍'],
   birthday:['Birthday','🎂'], sad:['Sad','😔']
 };
-const LABELS = Object.values(MOODS);
-const KEY = Object.fromEntries(Object.entries(MOODS).map(([k,v]) => [v,k]));
+const LABELS = Object.values(MOODS).flat();
+const KEY = {};
+for (const [k, arr] of Object.entries(MOODS)) for (const l of arr) KEY[l] = k;
+const classify = url => classifier(url, LABELS, { hypothesis_template: 'a photo of {}' });
 const $ = id => document.getElementById(id);
 const status = $('status'), bar = $('bar'), pick = $('pick'), fileInput = $('file');
 
 // ask the browser not to evict the cached model
 navigator.storage?.persist?.().catch(() => {});
+navigator.serviceWorker?.register('sw.js').catch(() => {});
+let installEvt;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('install').hidden = false; });
+$('install').addEventListener('click', async () => { installEvt.prompt(); await installEvt.userChoice; $('install').hidden = true; });
 
 // aggregate download progress across all model files
 const prog = {};
@@ -198,7 +230,7 @@ async function shrink(file, max = 448) {
   return new Promise(r => c.toBlob(b => r(URL.createObjectURL(b)), 'image/jpeg', 0.9));
 }
 
-let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all';
+let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all', manual = null;
 const GN = { pop:'Pop', rock:'Rock', hiphop:'Hip-Hop', rnb:'R&B', country:'Country', edm:'EDM', jazz:'Jazz', latin:'Latin', reggae:'Reggae', trap:'Trap', metal:'Metal', classical:'Classical', blues:'Blues', afrobeats:'Afrobeats' };
 try {
   [songs, genres, classifier] = await Promise.all([
@@ -213,7 +245,7 @@ try {
   setTimeout(() => $('load').hidden = true, 1200);
   // warm-up so the first real photo is fast
   const c = document.createElement('canvas'); c.width = c.height = 32;
-  c.toBlob(b => classifier(URL.createObjectURL(b), LABELS).catch(() => {}));
+  c.toBlob(b => classify(URL.createObjectURL(b)).catch(() => {}));
 } catch (e) {
   status.textContent = 'Could not load. Open it through a web server (not by double-clicking), check songs.json is in the same folder, and check your connection.';
   console.error(e);
@@ -225,9 +257,11 @@ async function handle(file) {
   try {
     const url = await shrink(file);
     $('preview').src = url;
-    const out = await classifier(url, LABELS);
-    top = out.slice(0, 3).map(o => ({ key: KEY[o.label], score: o.score }));
-    sel = 0; filt = 'all';
+    const out = await classify(url);
+    const sums = {};
+    for (const o of out) sums[KEY[o.label]] = (sums[KEY[o.label]] || 0) + o.score;
+    top = Object.entries(sums).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([key, score]) => ({ key, score }));
+    sel = 0; filt = 'all'; manual = null;
     $('out').hidden = false; pick.hidden = true;
     render();
     $('load').hidden = true;
@@ -243,17 +277,18 @@ pick.addEventListener('drop', e => { if (!fileInput.disabled) handle(e.dataTrans
 $('filters').addEventListener('click', e => { const f = e.target.dataset.f; if (f) { filt = f; render(); } });
 
 function render() {
-  const { key, score } = top[sel];
-  $('badge').textContent = `${META[key][1]} ${META[key][0]} · ${Math.round(score * 100)}%`;
+  const key = manual || top[sel].key, score = manual ? null : top[sel].score;
+  $('badge').textContent = `${META[key][1]} ${META[key][0]}` + (score == null ? '' : ` · ${Math.round(score * 100)}%`);
   $('tabs').innerHTML = '';
   top.forEach((t, i) => {
     const b = document.createElement('button');
-    b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', i === sel);
+    b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', i === sel && !manual);
     b.innerHTML = `<b>${META[t.key][1]}</b>${META[t.key][0]} ${Math.round(t.score * 100)}%`;
-    b.onclick = () => { sel = i; render(); };
+    b.onclick = () => { manual = null; sel = i; render(); };
     $('tabs').append(b);
   });
-  document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === filt));
+  document.querySelectorAll('#filters .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === filt));
+  document.querySelectorAll('#mchips .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.k === manual));
   const list = $('list'); list.innerHTML = '';
   const items = (songs[key] || []).filter(s => filt === 'all' || (filt === 'local' ? s.t : !s.t));
   if (!items.length) { list.innerHTML = '<li class="empty">No songs in this filter for this mood.</li>'; return; }
@@ -290,6 +325,12 @@ function initGenres() {
       if (open) for (const s of genres[open] || []) ul.append(songRow(s));
     };
     box.append(c);
+  }
+  for (const k of Object.keys(META)) {
+    const c = document.createElement('button');
+    c.className = 'chip'; c.type = 'button'; c.dataset.k = k; c.textContent = `${META[k][1]} ${META[k][0]}`; c.setAttribute('aria-pressed', 'false');
+    c.onclick = () => { manual = k; render(); };
+    $('mchips').append(c);
   }
   $('genres').hidden = false;
 }
