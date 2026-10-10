@@ -2,7 +2,7 @@
 
 Upload a photo and get song ideas for your Instagram Story.
 
-**Live site:** https://zbalbolaa.github.io/story-songs/
+**Live site:** 
 
 ## How it works
 
