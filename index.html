@@ -56,6 +56,9 @@
     background:transparent; color:var(--ink); cursor:pointer; text-decoration:none; white-space:nowrap; }
   button.copy { background:var(--pink); border-color:var(--pink); color:#fff; font-weight:600; }
   button:focus-visible, a.lnk:focus-visible { outline:3px solid var(--sun); outline-offset:2px; }
+  .genres { margin-top:30px; }
+  .genres h2 { font:800 1.25rem "Bricolage Grotesque",system-ui,sans-serif; margin:0 0 4px; }
+  .genres p { color:var(--muted); font-size:.88rem; margin:0 0 10px; }
   .empty { padding:16px; color:var(--muted); }
   .hint { color:var(--muted); font-size:.85rem; margin-top:22px; }
   @media (max-width:420px) { a.lnk.sp { display:none; } }
@@ -88,6 +91,13 @@
       <button class="chip" data-f="intl" aria-pressed="false" type="button">International</button>
     </div>
     <ul id="list"></ul>
+  </section>
+
+  <section class="genres" id="genres" hidden>
+    <h2>Or browse by genre</h2>
+    <p>No photo needed. Pick a genre to see songs.</p>
+    <div class="filters" id="gchips"></div>
+    <ul id="glist" hidden></ul>
   </section>
 
   <p class="hint">Copy the song name, then in Instagram tap the sticker icon, choose Music, and paste it into the search.</p>
@@ -148,15 +158,18 @@ async function shrink(file, max = 448) {
   return new Promise(r => c.toBlob(b => r(URL.createObjectURL(b)), 'image/jpeg', 0.9));
 }
 
-let classifier, songs, top = [], sel = 0, filt = 'all';
+let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all';
+const GN = { pop:'Pop', rock:'Rock', hiphop:'Hip-Hop', rnb:'R&B', country:'Country', edm:'EDM', jazz:'Jazz', latin:'Latin', reggae:'Reggae', trap:'Trap', metal:'Metal', classical:'Classical', blues:'Blues', afrobeats:'Afrobeats' };
 try {
-  [songs, classifier] = await Promise.all([
+  [songs, genres, classifier] = await Promise.all([
     fetch('songs.json').then(r => r.json()),
+    fetch('genres.json').then(r => r.json()),
     pipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32', { progress_callback: onProgress })
   ]);
   bar.style.width = '100%';
   status.textContent = 'Ready. Pick a photo.';
   pick.classList.remove('off'); fileInput.disabled = false;
+  initGenres();
   setTimeout(() => $('load').hidden = true, 1200);
   // warm-up so the first real photo is fast
   const c = document.createElement('canvas'); c.width = c.height = 32;
@@ -204,7 +217,9 @@ function render() {
   const list = $('list'); list.innerHTML = '';
   const items = (songs[key] || []).filter(s => filt === 'all' || (filt === 'local' ? s.t : !s.t));
   if (!items.length) { list.innerHTML = '<li class="empty">No songs in this filter for this mood.</li>'; return; }
-  for (const s of items) {
+  for (const s of items) list.append(songRow(s));
+}
+function songRow(s) {
     const q = encodeURIComponent(`${s.title} ${s.artist}`);
     const li = document.createElement('li');
     li.innerHTML = `<div class="song"><b></b><span></span></div>
@@ -220,8 +235,23 @@ function render() {
       catch { const t = document.createElement('textarea'); t.value = text; document.body.append(t); t.select(); document.execCommand('copy'); t.remove(); }
       btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy name', 1500);
     };
-    list.append(li);
+    return li;
+}
+
+function initGenres() {
+  const box = $('gchips'); let open = null;
+  for (const g of Object.keys(GN)) {
+    const c = document.createElement('button');
+    c.className = 'chip'; c.type = 'button'; c.textContent = GN[g]; c.setAttribute('aria-pressed', 'false');
+    c.onclick = () => {
+      open = open === g ? null : g;
+      box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x.textContent === GN[open]));
+      const ul = $('glist'); ul.innerHTML = ''; ul.hidden = !open;
+      if (open) for (const s of genres[open] || []) ul.append(songRow(s));
+    };
+    box.append(c);
   }
+  $('genres').hidden = false;
 }
 </script>
 </body>
