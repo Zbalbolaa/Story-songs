@@ -1,312 +1,258 @@
 {
   "sunset": [
-    {
-      "title": "Sunset Lover",
-      "artist": "Petit Biscuit"
-    },
-    {
-      "title": "Golden Hour",
-      "artist": "JVKE"
-    },
-    {
-      "title": "Heat Waves",
-      "artist": "Glass Animals"
-    },
-    {
-      "title": "Riptide",
-      "artist": "Vance Joy"
-    },
-    {
-      "title": "Coastline",
-      "artist": "Hollow Coves"
-    },
-    {
-      "title": "Sunday Best",
-      "artist": "Surfaces"
-    },
-    {
-      "title": "Nassam Alayna El Hawa",
-      "artist": "Fairuz",
-      "t": "ar"
-    },
-    {
-      "title": "Tamally Maak",
-      "artist": "Amr Diab",
-      "t": "ar"
-    },
-    {
-      "title": "Salma Ya Salama",
-      "artist": "Dalida",
-      "t": "ar"
-    },
-    {
-      "title": "Mal Hbibi Malou",
-      "artist": "Saad Lamjarred",
-      "t": "ma"
-    }
+    {"title": "Sunset Lover", "artist": "Petit Biscuit"},
+    {"title": "Golden Hour", "artist": "JVKE"},
+    {"title": "Heat Waves", "artist": "Glass Animals"},
+    {"title": "Riptide", "artist": "Vance Joy"},
+    {"title": "Coastline", "artist": "Hollow Coves"},
+    {"title": "Sunday Best", "artist": "Surfaces"},
+    {"title": "Nassam Alayna El Hawa", "artist": "Fairuz", "t": "ar"},
+    {"title": "Tamally Maak", "artist": "Amr Diab", "t": "ar"},
+    {"title": "Salma Ya Salama", "artist": "Dalida", "t": "ar"},
+    {"title": "Mal Hbibi Malou", "artist": "Saad Lamjarred", "t": "ma"}
   ],
   "party": [
-    {
-      "title": "Lm3allem",
-      "artist": "Saad Lamjarred",
-      "t": "ma"
-    },
-    {
-      "title": "Ghaltana",
-      "artist": "Saad Lamjarred",
-      "t": "ma"
-    },
-    {
-      "title": "Dalida",
-      "artist": "Soolking",
-      "t": "ar"
-    },
-    {
-      "title": "Ya Tabtab Wa Dalaa",
-      "artist": "Nancy Ajram",
-      "t": "ar"
-    },
-    {
-      "title": "Suavemente",
-      "artist": "Soolking",
-      "t": "ar"
-    },
-    {
-      "title": "Taki Taki",
-      "artist": "DJ Snake"
-    },
-    {
-      "title": "Mi Gente",
-      "artist": "J Balvin"
-    },
-    {
-      "title": "Blinding Lights",
-      "artist": "The Weeknd"
-    },
-    {
-      "title": "Calm Down",
-      "artist": "Rema"
-    },
-    {
-      "title": "Titi Me Pregunto",
-      "artist": "Bad Bunny"
-    }
+    {"title": "Lm3allem", "artist": "Saad Lamjarred", "t": "ma"},
+    {"title": "Ghaltana", "artist": "Saad Lamjarred", "t": "ma"},
+    {"title": "Dalida", "artist": "Soolking", "t": "ar"},
+    {"title": "Ya Tabtab Wa Dalaa", "artist": "Nancy Ajram", "t": "ar"},
+    {"title": "Suavemente", "artist": "Soolking", "t": "ar"},
+    {"title": "Taki Taki", "artist": "DJ Snake"},
+    {"title": "Mi Gente", "artist": "J Balvin"},
+    {"title": "Blinding Lights", "artist": "The Weeknd"},
+    {"title": "Calm Down", "artist": "Rema"},
+    {"title": "Titi Me Pregunto", "artist": "Bad Bunny"}
   ],
   "gym": [
-    {
-      "title": "Stronger",
-      "artist": "Kanye West"
-    },
-    {
-      "title": "Lose Yourself",
-      "artist": "Eminem"
-    },
-    {
-      "title": "Till I Collapse",
-      "artist": "Eminem"
-    },
-    {
-      "title": "Can't Hold Us",
-      "artist": "Macklemore"
-    },
-    {
-      "title": "SICKO MODE",
-      "artist": "Travis Scott"
-    },
-    {
-      "title": "Believer",
-      "artist": "Imagine Dragons"
-    },
-    {
-      "title": "Number One",
-      "artist": "Mohamed Ramadan",
-      "t": "ar"
-    }
+    {"title": "Stronger", "artist": "Kanye West"},
+    {"title": "Lose Yourself", "artist": "Eminem"},
+    {"title": "Till I Collapse", "artist": "Eminem"},
+    {"title": "Can't Hold Us", "artist": "Macklemore"},
+    {"title": "SICKO MODE", "artist": "Travis Scott"},
+    {"title": "Believer", "artist": "Imagine Dragons"},
+    {"title": "Number One", "artist": "Mohamed Ramadan", "t": "ar"}
   ],
   "beach": [
-    {
-      "title": "Waka Waka",
-      "artist": "Shakira"
-    },
-    {
-      "title": "Despacito",
-      "artist": "Luis Fonsi"
-    },
-    {
-      "title": "Summer",
-      "artist": "Calvin Harris"
-    },
-    {
-      "title": "Sunflower",
-      "artist": "Post Malone"
-    },
-    {
-      "title": "Island in the Sun",
-      "artist": "Weezer"
-    },
-    {
-      "title": "Aicha",
-      "artist": "Cheb Khaled",
-      "t": "ar"
-    },
-    {
-      "title": "Didi",
-      "artist": "Cheb Khaled",
-      "t": "ar"
-    },
-    {
-      "title": "Akhasmak Ah",
-      "artist": "Nancy Ajram",
-      "t": "ar"
-    }
+    {"title": "Waka Waka", "artist": "Shakira"},
+    {"title": "Despacito", "artist": "Luis Fonsi"},
+    {"title": "Summer", "artist": "Calvin Harris"},
+    {"title": "Sunflower", "artist": "Post Malone"},
+    {"title": "Island in the Sun", "artist": "Weezer"},
+    {"title": "Aicha", "artist": "Cheb Khaled", "t": "ar"},
+    {"title": "Didi", "artist": "Cheb Khaled", "t": "ar"},
+    {"title": "Akhasmak Ah", "artist": "Nancy Ajram", "t": "ar"}
   ],
   "rainy": [
-    {
-      "title": "Set Fire to the Rain",
-      "artist": "Adele"
-    },
-    {
-      "title": "Someone Like You",
-      "artist": "Adele"
-    },
-    {
-      "title": "Fix You",
-      "artist": "Coldplay"
-    },
-    {
-      "title": "Another Love",
-      "artist": "Tom Odell"
-    },
-    {
-      "title": "Let Her Go",
-      "artist": "Passenger"
-    },
-    {
-      "title": "Derniere Danse",
-      "artist": "Indila"
-    },
-    {
-      "title": "Li Beirut",
-      "artist": "Fairuz",
-      "t": "ar"
-    },
-    {
-      "title": "Enta Omri",
-      "artist": "Umm Kulthum",
-      "t": "ar"
-    }
+    {"title": "Set Fire to the Rain", "artist": "Adele"},
+    {"title": "Someone Like You", "artist": "Adele"},
+    {"title": "Fix You", "artist": "Coldplay"},
+    {"title": "Another Love", "artist": "Tom Odell"},
+    {"title": "Let Her Go", "artist": "Passenger"},
+    {"title": "Derniere Danse", "artist": "Indila"},
+    {"title": "Li Beirut", "artist": "Fairuz", "t": "ar"},
+    {"title": "Enta Omri", "artist": "Umm Kulthum", "t": "ar"}
   ],
   "food": [
-    {
-      "title": "Banana Pancakes",
-      "artist": "Jack Johnson"
-    },
-    {
-      "title": "Sugar",
-      "artist": "Maroon 5"
-    },
-    {
-      "title": "Happy",
-      "artist": "Pharrell Williams"
-    },
-    {
-      "title": "Better Together",
-      "artist": "Jack Johnson"
-    },
-    {
-      "title": "Les Champs-Elysees",
-      "artist": "Joe Dassin"
-    },
-    {
-      "title": "Good as Hell",
-      "artist": "Lizzo"
-    },
-    {
-      "title": "J'en ai marre",
-      "artist": "Najat Aatabou",
-      "t": "ma"
-    },
-    {
-      "title": "C'est la vie",
-      "artist": "Cheb Khaled",
-      "t": "ar"
-    },
-    {
-      "title": "Nour El Ain",
-      "artist": "Amr Diab",
-      "t": "ar"
-    }
+    {"title": "Banana Pancakes", "artist": "Jack Johnson"},
+    {"title": "Sugar", "artist": "Maroon 5"},
+    {"title": "Happy", "artist": "Pharrell Williams"},
+    {"title": "Better Together", "artist": "Jack Johnson"},
+    {"title": "Les Champs-Elysees", "artist": "Joe Dassin"},
+    {"title": "Good as Hell", "artist": "Lizzo"},
+    {"title": "J'en ai marre", "artist": "Najat Aatabou", "t": "ma"},
+    {"title": "C'est la vie", "artist": "Cheb Khaled", "t": "ar"},
+    {"title": "Nour El Ain", "artist": "Amr Diab", "t": "ar"}
   ],
   "friends": [
-    {
-      "title": "Count on Me",
-      "artist": "Bruno Mars"
-    },
-    {
-      "title": "I Gotta Feeling",
-      "artist": "Black Eyed Peas"
-    },
-    {
-      "title": "Best Day of My Life",
-      "artist": "American Authors"
-    },
-    {
-      "title": "See You Again",
-      "artist": "Wiz Khalifa"
-    },
-    {
-      "title": "Good Time",
-      "artist": "Owl City"
-    },
-    {
-      "title": "Lean on Me",
-      "artist": "Bill Withers"
-    },
-    {
-      "title": "Hadal Ahbek",
-      "artist": "Issam Alnajjar",
-      "t": "ar"
-    },
-    {
-      "title": "Aayshalak",
-      "artist": "Elissa",
-      "t": "ar"
-    }
+    {"title": "Count on Me", "artist": "Bruno Mars"},
+    {"title": "I Gotta Feeling", "artist": "Black Eyed Peas"},
+    {"title": "Best Day of My Life", "artist": "American Authors"},
+    {"title": "See You Again", "artist": "Wiz Khalifa"},
+    {"title": "Good Time", "artist": "Owl City"},
+    {"title": "Lean on Me", "artist": "Bill Withers"},
+    {"title": "Hadal Ahbek", "artist": "Issam Alnajjar", "t": "ar"},
+    {"title": "Aayshalak", "artist": "Elissa", "t": "ar"}
   ],
   "city_night": [
-    {
-      "title": "Midnight City",
-      "artist": "M83"
-    },
-    {
-      "title": "Nights",
-      "artist": "Frank Ocean"
-    },
-    {
-      "title": "Starboy",
-      "artist": "The Weeknd"
-    },
-    {
-      "title": "Redbone",
-      "artist": "Childish Gambino"
-    },
-    {
-      "title": "After Dark",
-      "artist": "Mr.Kitty"
-    },
-    {
-      "title": "Streets",
-      "artist": "Doja Cat"
-    },
-    {
-      "title": "Casablanca",
-      "artist": "Saad Lamjarred",
-      "t": "ma"
-    },
-    {
-      "title": "Enty",
-      "artist": "Saad Lamjarred",
-      "t": "ma"
-    }
+    {"title": "Midnight City", "artist": "M83"},
+    {"title": "Nights", "artist": "Frank Ocean"},
+    {"title": "Starboy", "artist": "The Weeknd"},
+    {"title": "Redbone", "artist": "Childish Gambino"},
+    {"title": "After Dark", "artist": "Mr.Kitty"},
+    {"title": "Streets", "artist": "Doja Cat"},
+    {"title": "Casablanca", "artist": "Saad Lamjarred", "t": "ma"},
+    {"title": "Enty", "artist": "Saad Lamjarred", "t": "ma"}
+  ],
+  "love": [
+    {"title": "Perfect", "artist": "Ed Sheeran"},
+    {"title": "All of Me", "artist": "John Legend"},
+    {"title": "Thinking Out Loud", "artist": "Ed Sheeran"},
+    {"title": "A Thousand Years", "artist": "Christina Perri"},
+    {"title": "Can't Help Falling in Love", "artist": "Elvis Presley"},
+    {"title": "Make You Feel My Love", "artist": "Adele"},
+    {"title": "Photograph", "artist": "Ed Sheeran"},
+    {"title": "Habibi Ya Nour El Ain", "artist": "Amr Diab", "t": "ar"},
+    {"title": "Kifak Inta", "artist": "Fairuz", "t": "ar"}
+  ],
+  "nature": [
+    {"title": "Home", "artist": "Edward Sharpe & The Magnetic Zeros"},
+    {"title": "Little Talks", "artist": "Of Monsters and Men"},
+    {"title": "Take Me Home, Country Roads", "artist": "John Denver"},
+    {"title": "Holocene", "artist": "Bon Iver"},
+    {"title": "Ho Hey", "artist": "The Lumineers"},
+    {"title": "To Build a Home", "artist": "The Cinematic Orchestra"},
+    {"title": "Rivers and Roads", "artist": "The Head and the Heart"},
+    {"title": "Mountain Sound", "artist": "Of Monsters and Men"},
+    {"title": "Skinny Love", "artist": "Bon Iver"}
+  ],
+  "roadtrip": [
+    {"title": "Life Is a Highway", "artist": "Tom Cochrane"},
+    {"title": "Fast Car", "artist": "Tracy Chapman"},
+    {"title": "Take It Easy", "artist": "Eagles"},
+    {"title": "Africa", "artist": "Toto"},
+    {"title": "Don't Stop Believin'", "artist": "Journey"},
+    {"title": "Drive", "artist": "Incubus"},
+    {"title": "Sweet Home Alabama", "artist": "Lynyrd Skynyrd"},
+    {"title": "Hotel California", "artist": "Eagles"},
+    {"title": "On the Road Again", "artist": "Willie Nelson"},
+    {"title": "Ya Rayah", "artist": "Rachid Taha", "t": "ar"}
+  ],
+  "coffee": [
+    {"title": "Sunday Morning", "artist": "Maroon 5"},
+    {"title": "Put Your Records On", "artist": "Corinne Bailey Rae"},
+    {"title": "Lovely Day", "artist": "Bill Withers"},
+    {"title": "Here Comes the Sun", "artist": "The Beatles"},
+    {"title": "Budapest", "artist": "George Ezra"},
+    {"title": "La Vie en Rose", "artist": "Edith Piaf"},
+    {"title": "Dream a Little Dream of Me", "artist": "Ella Fitzgerald"},
+    {"title": "Pink + White", "artist": "Frank Ocean"},
+    {"title": "Valerie", "artist": "Amy Winehouse"},
+    {"title": "Saalouni El Nas", "artist": "Fairuz", "t": "ar"}
+  ],
+  "stars": [
+    {"title": "Starlight", "artist": "Muse"},
+    {"title": "Yellow", "artist": "Coldplay"},
+    {"title": "A Sky Full of Stars", "artist": "Coldplay"},
+    {"title": "Counting Stars", "artist": "OneRepublic"},
+    {"title": "Space Song", "artist": "Beach House"},
+    {"title": "Fly Me to the Moon", "artist": "Frank Sinatra"},
+    {"title": "Starman", "artist": "David Bowie"},
+    {"title": "Moon River", "artist": "Audrey Hepburn"},
+    {"title": "Dreams", "artist": "Fleetwood Mac"}
+  ],
+  "winter": [
+    {"title": "Winter Song", "artist": "Sara Bareilles"},
+    {"title": "Snowman", "artist": "Sia"},
+    {"title": "Cold Heart", "artist": "Elton John"},
+    {"title": "White Winter Hymnal", "artist": "Fleet Foxes"},
+    {"title": "Snow (Hey Oh)", "artist": "Red Hot Chili Peppers"},
+    {"title": "Mad World", "artist": "Gary Jules"},
+    {"title": "Let It Snow", "artist": "Dean Martin"},
+    {"title": "Cold", "artist": "Maroon 5"},
+    {"title": "Winter Wonderland", "artist": "Ella Fitzgerald"}
+  ],
+  "spring": [
+    {"title": "Three Little Birds", "artist": "Bob Marley"},
+    {"title": "Walking on Sunshine", "artist": "Katrina and the Waves"},
+    {"title": "Good Day Sunshine", "artist": "The Beatles"},
+    {"title": "Dandelions", "artist": "Ruth B."},
+    {"title": "Flowers", "artist": "Miley Cyrus"},
+    {"title": "Bloom", "artist": "The Paper Kites"},
+    {"title": "Mr. Blue Sky", "artist": "Electric Light Orchestra"},
+    {"title": "Lovely", "artist": "Billie Eilish"}
+  ],
+  "pets": [
+    {"title": "Who Let the Dogs Out", "artist": "Baha Men"},
+    {"title": "Hound Dog", "artist": "Elvis Presley"},
+    {"title": "Stray Cat Strut", "artist": "Stray Cats"},
+    {"title": "Dog Days Are Over", "artist": "Florence + The Machine"},
+    {"title": "What's New Pussycat", "artist": "Tom Jones"},
+    {"title": "Best Friend", "artist": "Rex Orange County"},
+    {"title": "Blackbird", "artist": "The Beatles"}
+  ],
+  "selfie": [
+    {"title": "Levitating", "artist": "Dua Lipa"},
+    {"title": "Don't Start Now", "artist": "Dua Lipa"},
+    {"title": "Physical", "artist": "Dua Lipa"},
+    {"title": "Bad Guy", "artist": "Billie Eilish"},
+    {"title": "Confident", "artist": "Demi Lovato"},
+    {"title": "Shake It Off", "artist": "Taylor Swift"},
+    {"title": "Born This Way", "artist": "Lady Gaga"},
+    {"title": "Hotline Bling", "artist": "Drake"},
+    {"title": "Say So", "artist": "Doja Cat"}
+  ],
+  "travel": [
+    {"title": "Sofia", "artist": "Alvaro Soler"},
+    {"title": "Lost on You", "artist": "LP"},
+    {"title": "Viva la Vida", "artist": "Coldplay"},
+    {"title": "I'm Yours", "artist": "Jason Mraz"},
+    {"title": "Home", "artist": "Phillip Phillips"},
+    {"title": "Where the Streets Have No Name", "artist": "U2"},
+    {"title": "Take Me Home, Country Roads", "artist": "John Denver"},
+    {"title": "Aicha", "artist": "Cheb Khaled", "t": "ar"}
+  ],
+  "football": [
+    {"title": "We Are the Champions", "artist": "Queen"},
+    {"title": "Seven Nation Army", "artist": "The White Stripes"},
+    {"title": "We Will Rock You", "artist": "Queen"},
+    {"title": "Wavin' Flag", "artist": "K'naan"},
+    {"title": "Hall of Fame", "artist": "The Script"},
+    {"title": "Live It Up", "artist": "Nicky Jam"},
+    {"title": "La Copa de la Vida", "artist": "Ricky Martin"},
+    {"title": "Hayya Hayya", "artist": "Trinidad Cardona"},
+    {"title": "Arhbo", "artist": "Ozuna"}
+  ],
+  "study": [
+    {"title": "Weightless", "artist": "Marconi Union"},
+    {"title": "Clair de Lune", "artist": "Claude Debussy"},
+    {"title": "Experience", "artist": "Ludovico Einaudi"},
+    {"title": "Nuvole Bianche", "artist": "Ludovico Einaudi"},
+    {"title": "River Flows in You", "artist": "Yiruma"},
+    {"title": "Comptine d'un autre ete", "artist": "Yann Tiersen"},
+    {"title": "Time", "artist": "Hans Zimmer"},
+    {"title": "Gymnopedie No. 1", "artist": "Erik Satie"},
+    {"title": "Spiegel im Spiegel", "artist": "Arvo Part"},
+    {"title": "Intro", "artist": "The xx"}
+  ],
+  "desert": [
+    {"title": "Desert Rose", "artist": "Sting"},
+    {"title": "Walk Like an Egyptian", "artist": "The Bangles"},
+    {"title": "Africa", "artist": "Toto"},
+    {"title": "Alf Leila Wa Leila", "artist": "Umm Kulthum", "t": "ar"},
+    {"title": "Aman Iman", "artist": "Tinariwen", "t": "ar"},
+    {"title": "Rock El Casbah", "artist": "Rachid Taha", "t": "ar"},
+    {"title": "Ya Rayah", "artist": "Rachid Taha", "t": "ar"},
+    {"title": "Aicha", "artist": "Cheb Khaled", "t": "ar"}
+  ],
+  "wedding": [
+    {"title": "Marry You", "artist": "Bruno Mars"},
+    {"title": "Can't Stop the Feeling", "artist": "Justin Timberlake"},
+    {"title": "I Wanna Dance with Somebody", "artist": "Whitney Houston"},
+    {"title": "Shut Up and Dance", "artist": "Walk the Moon"},
+    {"title": "September", "artist": "Earth, Wind & Fire"},
+    {"title": "Celebration", "artist": "Kool & The Gang"},
+    {"title": "Marry Me", "artist": "Train"},
+    {"title": "Lm3allem", "artist": "Saad Lamjarred", "t": "ma"},
+    {"title": "Ya Tabtab Wa Dalaa", "artist": "Nancy Ajram", "t": "ar"}
+  ],
+  "birthday": [
+    {"title": "Happy Birthday", "artist": "Stevie Wonder"},
+    {"title": "Birthday", "artist": "Katy Perry"},
+    {"title": "Birthday Cake", "artist": "Rihanna"},
+    {"title": "Birthday", "artist": "The Beatles"},
+    {"title": "Cake by the Ocean", "artist": "DNCE"},
+    {"title": "Last Friday Night", "artist": "Katy Perry"},
+    {"title": "Sana Helwa Ya Gamil", "artist": "Traditional", "t": "ar"}
+  ],
+  "sad": [
+    {"title": "Someone You Loved", "artist": "Lewis Capaldi"},
+    {"title": "Hurt", "artist": "Johnny Cash"},
+    {"title": "Tears in Heaven", "artist": "Eric Clapton"},
+    {"title": "Creep", "artist": "Radiohead"},
+    {"title": "Say Something", "artist": "A Great Big World"},
+    {"title": "When the Party's Over", "artist": "Billie Eilish"},
+    {"title": "Skinny Love", "artist": "Bon Iver"},
+    {"title": "Ana Fi Intizarak", "artist": "Umm Kulthum", "t": "ar"},
+    {"title": "Hadal Ahbek", "artist": "Issam Alnajjar", "t": "ar"}
   ]
 }
