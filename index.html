@@ -215,7 +215,11 @@ const MOODS = {
   wedding:['a wedding celebration','a bride and groom in wedding clothes'],
   birthday:['a birthday cake with candles','balloons and party decorations'],
   sad:['a lonely person looking out of a window','a moody gloomy grey scene'],
-  home:['a building with a small garden','a house with plants and a green lawn','modern architecture, a building exterior','a cozy home and backyard']
+  home:['a building with a small garden','a house with plants and a green lawn','modern architecture, a building exterior','a cozy home and backyard'],
+  street:['a graffiti wall in an urban street','young people in streetwear in the city','a city rooftop or alley at dusk'],
+  retro:['an old vintage photograph','a retro record player or old radio','old classic cinema or vintage decor'],
+  spiritual:['a mosque with a minaret','a peaceful prayer scene at sunrise','traditional lanterns and Ramadan decorations'],
+  kids:['a child playing with toys','kids laughing at a playground','colorful toys and balloons for children']
 };
 const META = {
   sunset:['Sunset','🌇'], party:['Party','🎉'], gym:['Gym','💪'], beach:['Beach','🏖️'],
@@ -223,7 +227,7 @@ const META = {
   love:['Love','❤️'], nature:['Nature','🏔️'], roadtrip:['Road trip','🚗'], coffee:['Coffee','☕'], stars:['Stars','✨'],
   winter:['Winter','❄️'], spring:['Flowers','🌸'], pets:['Pets','🐾'], selfie:['Selfie','🤳'], travel:['Travel','✈️'],
   football:['Football','⚽'], study:['Study','📚'], desert:['Desert','🏜️'], wedding:['Wedding','💍'],
-  birthday:['Birthday','🎂'], sad:['Sad','😔'], home:['Home & garden','🏡']
+  birthday:['Birthday','🎂'], sad:['Sad','😔'], home:['Home & garden','🏡'], street:['Street','🛹'], retro:['Retro','📻'], spiritual:['Peaceful','🕌'], kids:['Kids','🧸']
 };
 const LABELS = Object.values(MOODS).flat();
 const KEY = {};
@@ -292,19 +296,39 @@ const T = {
     dl:'جارٍ تحميل النموذج…', ready:'جاهز. اختر صورة.', reading:'جارٍ تحليل الأجواء…' }
 };
 const MN = {
-  fr: { sunset:'Coucher de soleil', party:'Fête', gym:'Sport', beach:'Plage', rainy:'Pluie', food:'Cuisine', friends:'Amis', city_night:'Ville la nuit', love:'Amour', nature:'Nature', roadtrip:'Road trip', coffee:'Café', stars:'Étoiles', winter:'Hiver', spring:'Fleurs', pets:'Animaux', selfie:'Selfie', travel:'Voyage', football:'Football', study:'Études', desert:'Désert', wedding:'Mariage', birthday:'Anniversaire', sad:'Triste', home:'Maison & jardin' },
-  ar: { sunset:'غروب', party:'حفلة', gym:'رياضة', beach:'شاطئ', rainy:'مطر', food:'أكل', friends:'أصدقاء', city_night:'المدينة ليلاً', love:'حب', nature:'طبيعة', roadtrip:'رحلة طريق', coffee:'قهوة', stars:'نجوم', winter:'شتاء', spring:'زهور', pets:'حيوانات أليفة', selfie:'سيلفي', travel:'سفر', football:'كرة القدم', study:'دراسة', desert:'صحراء', wedding:'عرس', birthday:'عيد ميلاد', sad:'حزين', home:'بيت وحديقة' }
+  fr: { sunset:'Coucher de soleil', party:'Fête', gym:'Sport', beach:'Plage', rainy:'Pluie', food:'Cuisine', friends:'Amis', city_night:'Ville la nuit', love:'Amour', nature:'Nature', roadtrip:'Road trip', coffee:'Café', stars:'Étoiles', winter:'Hiver', spring:'Fleurs', pets:'Animaux', selfie:'Selfie', travel:'Voyage', football:'Football', study:'Études', desert:'Désert', wedding:'Mariage', birthday:'Anniversaire', sad:'Triste', home:'Maison & jardin', street:'Street', retro:'Rétro', spiritual:'Spirituel', kids:'Enfants' },
+  ar: { sunset:'غروب', party:'حفلة', gym:'رياضة', beach:'شاطئ', rainy:'مطر', food:'أكل', friends:'أصدقاء', city_night:'المدينة ليلاً', love:'حب', nature:'طبيعة', roadtrip:'رحلة طريق', coffee:'قهوة', stars:'نجوم', winter:'شتاء', spring:'زهور', pets:'حيوانات أليفة', selfie:'سيلفي', travel:'سفر', football:'كرة القدم', study:'دراسة', desert:'صحراء', wedding:'عرس', birthday:'عيد ميلاد', sad:'حزين', home:'بيت وحديقة', street:'شارع', retro:'كلاسيكي', spiritual:'روحاني', kids:'أطفال' }
 };
 const CAPS = {
-  sunset:['Chasing the last light.','Golden hour never misses.'], party:['Good vibes only.','Tonight we dance.'], gym:['Stronger than yesterday.','Sweat now, shine later.'],
-  beach:['Salt in the air, sand in my hair.','Sea you soon.'], rainy:['Rainy days and cozy ways.','Let it pour.'], food:['Good food, good mood.','Life is short, eat the cake.'],
-  friends:['Better together.','My people.'], city_night:['City lights, endless nights.','Night owl mode.'], love:['You are my favorite place.','Love, simply.'],
-  nature:['Take me back to the mountains.','Breathe in, breathe out.'], roadtrip:['Windows down, volume up.','Wherever the road goes.'], coffee:['But first, coffee.','Slow mornings.'],
-  stars:['Under a sky full of stars.','Dreaming under the moon.'], winter:['Cold air, warm heart.','Winter mood.'], spring:['Bloom where you are planted.','Hello, spring.'],
-  pets:['Paws and relax.','My favorite human is a pet.'], selfie:['Just me being me.','Main character energy.'], travel:['Wanderlust mode on.','Collecting moments, not things.'],
-  football:['Game day.','Eat, sleep, football, repeat.'], study:['Focus mode.','Little steps every day.'], desert:['Lost in the dunes.','Sand, silence and sky.'],
-  wedding:['Happily ever after starts here.','Love in full bloom.'], birthday:['Another year of magic.','Cake first, questions later.'], sad:['Quiet days.','Healing slowly.'],
-  home:['Home is where the garden grows.','Simple and peaceful.']
+  sunset:["Chasing the last light.", "Golden hour never misses.", "The sky showed off again.", "Sunsets and good company.", "Ending the day in color.", "Catch me where the sky turns orange."],
+  party:["Good vibes only.", "Tonight we dance.", "Turn it up.", "Made memories, lost my voice.", "Lights on, worries off.", "The night is young."],
+  gym:["Stronger than yesterday.", "Sweat now, shine later.", "No excuses, just reps.", "Earn it.", "Progress, not perfection.", "Leg day, every day."],
+  beach:["Salt in the air, sand in my hair.", "Sea you soon.", "Vitamin sea.", "Lost track of time and found the waves.", "Barefoot and carefree.", "Tide is high, mood is higher."],
+  rainy:["Rainy days and cozy ways.", "Let it pour.", "Wet streets, warm thoughts.", "Chasing puddles and playlists.", "Thunder and tea.", "Grey skies, soft heart."],
+  food:["Good food, good mood.", "Life is short, eat the cake.", "Dinner is my love language.", "Taste the moment.", "First we eat, then we do everything else.", "Plate goals."],
+  friends:["Better together.", "My people.", "Laughing until it hurts.", "Friends are the family we choose.", "Squad up.", "Memories in the making."],
+  city_night:["City lights, endless nights.", "Night owl mode.", "Lost in the lights.", "The city never sleeps, neither do I.", "After dark, before dawn.", "Neon dreams."],
+  love:["You are my favorite place.", "Love, simply.", "Two hearts, one story.", "Home is wherever you are.", "Always you.", "My person."],
+  nature:["Take me back to the mountains.", "Breathe in, breathe out.", "Lost in the green.", "Find me where the wild things grow.", "Fresh air, clear mind.", "Nature never rushes."],
+  roadtrip:["Windows down, volume up.", "Wherever the road goes.", "Miles and memories.", "Not all who wander are lost.", "Next stop: anywhere.", "Good company, great playlist."],
+  coffee:["But first, coffee.", "Slow mornings.", "Brewing a good day.", "Coffee and calm.", "Sip, smile, repeat.", "Fuel for the dreamers."],
+  stars:["Under a sky full of stars.", "Dreaming under the moon.", "Small human, big universe.", "Wish upon something.", "Night sky therapy.", "Counting stars, not worries."],
+  winter:["Cold air, warm heart.", "Winter mood.", "Cozy season.", "Frosty mornings, warm drinks.", "Snow day state of mind.", "Layers and hot chocolate."],
+  spring:["Bloom where you are planted.", "Hello, spring.", "Petals and fresh starts.", "Gardens grow dreams.", "Stop and smell the flowers.", "New season, new energy."],
+  pets:["Paws and relax.", "My favorite human is a pet.", "Best friend, four legs.", "Fur real, I love you.", "Purrfect day.", "Unconditional love, with whiskers."],
+  selfie:["Just me being me.", "Main character energy.", "Caught in good lighting.", "Confidence is the best outfit.", "Smile, it looks good on you.", "Self love, no filter."],
+  travel:["Wanderlust mode on.", "Collecting moments, not things.", "Adventure is calling.", "Passport ready.", "New places, new stories.", "Take only memories."],
+  football:["Game day.", "Eat, sleep, football, repeat.", "Ninety minutes of pure emotion.", "Pitch and passion.", "For the love of the game.", "Goals, glory and good friends."],
+  study:["Focus mode.", "Little steps every day.", "Coffee, books, dreams.", "Future me says thank you.", "Grind now, shine later.", "One page at a time."],
+  desert:["Lost in the dunes.", "Sand, silence and sky.", "Where the horizon never ends.", "Footprints in the sand.", "Sahara state of mind.", "Golden sand, endless sky."],
+  wedding:["Happily ever after starts here.", "Love in full bloom.", "Said yes forever.", "Dancing into forever.", "Two souls, one celebration.", "Mabrouk to the happy couple."],
+  birthday:["Another year of magic.", "Cake first, questions later.", "Make a wish.", "Leveling up.", "Older, wiser, still dancing.", "Today is all about me."],
+  sad:["Quiet days.", "Healing slowly.", "It's okay to feel it all.", "Soft hours.", "Some days are just heavy.", "This too shall pass."],
+  home:["Home is where the garden grows.", "Simple and peaceful.", "Small spaces, big peace.", "Grow where you live.", "Home sweet home.", "Cozy corners and green leaves."],
+  street:["City is my playground.","Concrete jungle, real stories.","Built different.","Street lights, real ones.","No filter, no fear.","Born in the block."],
+  retro:["Old soul, golden hits.","They don't make them like this anymore.","Back when music was magic.","Vintage vibes only.","A classic never fades.","Timeless."],
+  spiritual:["Peace begins within.","Quiet heart, calm soul.","Grateful for every sunrise.","Light in the stillness.","Ramadan Kareem.","Faith over fear."],
+  kids:["Little moments, big smiles.","Pure joy.","Playtime is the best time.","Growing up too fast.","Giggles and sunshine.","Tiny humans, huge hearts."]
 };
 let lang = 'en';
 try { lang = localStorage.getItem('stazam-lang') || (navigator.language || 'en').slice(0, 2); } catch {}
@@ -318,8 +342,8 @@ const favs = () => store('stazam-fav', []);
 const fid = s => `${s.title}|${s.artist}`;
 const bump = k => { const m = store('stazam-learn', {}); m[k] = (m[k] || 0) + 1; save('stazam-learn', m); };
 
-const GN = { pop:'Pop', rock:'Rock', hiphop:'Hip-Hop', rnb:'R&B', country:'Country', edm:'EDM', jazz:'Jazz', latin:'Latin', reggae:'Reggae', trap:'Trap', metal:'Metal', classical:'Classical', blues:'Blues', afrobeats:'Afrobeats' };
-let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all', manual = null, seed = 0, cap = 0, shown = [], lastFile = null;
+const GN = { moroccan:'Moroccan', oldies:'Oldies', disco:'Disco & Funk', arabicpop:'Arabic pop', rai:'Raï', gulf:'Gulf', shaabi:'Shaabi & Mahraganat', tarab:'Classic Arabic', pop:'Pop', rock:'Rock', hiphop:'Hip-Hop', rnb:'R&B', country:'Country', edm:'EDM', jazz:'Jazz', latin:'Latin', reggae:'Reggae', trap:'Trap', metal:'Metal', classical:'Classical', blues:'Blues', afrobeats:'Afrobeats' };
+let classifier, songs, genres = {}, top = [], sel = 0, filt = 'all', manual = null, seed = Math.floor(Math.random() * 1e9) + 1, cap = Math.floor(Math.random() * 6), shown = [], lastFile = null;
 const curKey = () => manual || top[sel].key;
 
 applyLang();
@@ -354,7 +378,7 @@ async function handle(file) {
     for (const o of out) sums[KEY[o.label]] = (sums[KEY[o.label]] || 0) + o.score;
     for (const k in sums) sums[k] += Math.min(.1, .02 * (L[k] || 0));   // moods you picked before get a small boost
     top = Object.entries(sums).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([key, score]) => ({ key, score: Math.min(score, 1) }));
-    sel = 0; filt = 'all'; manual = null; seed = 0; cap = 0;
+    sel = 0; filt = 'all'; manual = null; seed = Math.floor(Math.random() * 1e9) + 1; cap = Math.floor(Math.random() * 6);
     $('out').hidden = false; pick.hidden = true;
     render();
     $('load').hidden = true;
@@ -401,14 +425,15 @@ function render() {
     const b = document.createElement('button');
     b.className = 'tab'; b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', i === sel && !manual);
     b.innerHTML = `<b>${META[x.key][1]}</b>${mn(x.key)} ${Math.round(x.score * 100)}%`;
-    b.onclick = () => { manual = null; sel = i; seed = 0; cap = 0; render(); };
+    b.onclick = () => { manual = null; sel = i; seed = Math.floor(Math.random() * 1e9) + 1; cap = Math.floor(Math.random() * 6); render(); };
     $('tabs').append(b);
   });
   document.querySelectorAll('#filters .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.f === filt));
   document.querySelectorAll('#mchips .chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.k === manual));
   const list = $('list'); list.innerHTML = '';
   const all = (songs[key] || []).filter(s => filt === 'all' || (filt === 'local' ? s.t : !s.t));
-  shown = (seed ? shuffled(all, seed) : all).slice(0, 6);
+  const L = shuffled(all.filter(s => s.t), seed), O = shuffled(all.filter(s => !s.t), seed + 7);
+  shown = filt === 'all' ? shuffled([...L.slice(0, 4), ...O.slice(0, 8 - Math.min(4, L.length)), ...L.slice(4)].slice(0, 8), seed + 3) : shuffled(all, seed).slice(0, 8);
   if (!shown.length) list.innerHTML = '<li class="empty">—</li>';
   for (const s of shown) list.append(songRow(s));
   showCap();
@@ -455,14 +480,14 @@ function initGenres() {
       open = open === g ? null : g;
       box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x.textContent === GN[open]));
       const ul = $('glist'); ul.innerHTML = ''; ul.hidden = !open;
-      if (open) for (const s of genres[open] || []) ul.append(songRow(s));
+      if (open) for (const s of shuffled(genres[open] || [], Math.floor(Math.random() * 1e9) + 1).slice(0, 15)) ul.append(songRow(s));
     };
     box.append(c);
   }
   for (const k of Object.keys(META)) {
     const c = document.createElement('button');
     c.className = 'chip'; c.type = 'button'; c.dataset.k = k; c.textContent = `${META[k][1]} ${mn(k)}`; c.setAttribute('aria-pressed', 'false');
-    c.onclick = () => { manual = k; seed = 0; cap = 0; bump(k); render(); };
+    c.onclick = () => { manual = k; seed = Math.floor(Math.random() * 1e9) + 1; cap = Math.floor(Math.random() * 6); bump(k); render(); };
     $('mchips').append(c);
   }
   $('genres').hidden = false;
